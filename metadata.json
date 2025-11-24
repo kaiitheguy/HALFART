@@ -1,0 +1,5 @@
+{
+  "name": "HALFART",
+  "description": "A chat-driven NYC art gallery companion that helps users discover exhibitions based on real-time web search.",
+  "requestFramePermissions": []
+}
