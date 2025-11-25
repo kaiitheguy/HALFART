@@ -29,13 +29,10 @@ export const GalleryPanel: React.FC<GalleryPanelProps> = ({
 }) => {
   const [mode, setMode] = useState<ViewMode>('suggest');
 
-  // Strict Filter: Only show galleries that have a valid exhibition image.
-  // The prompt requirement is strict: "If you cannot find a reliable image, leave image_url empty. The frontend will hide cards without images."
-  const visibleGalleries = galleries.filter(g => {
-    const hasExhibitionImage = g.exhibitions?.[0]?.image_url;
-    // We allow fallback to gallery.imageUrl if explicitly provided by AI, but prompt says prefer exhibition.
-    return !!(hasExhibitionImage || g.imageUrl);
-  });
+  // We no longer strictly filter out galleries without images. 
+  // Instead we rely on the GalleryCard to render a nice placeholder if needed.
+  // We can still filter out purely empty/broken entries if desired, but general search results should show.
+  const visibleGalleries = galleries;
 
   return (
     <div className="flex-1 bg-stone-50 h-[50vh] md:h-full overflow-y-auto relative flex flex-col">
@@ -103,12 +100,10 @@ export const GalleryPanel: React.FC<GalleryPanelProps> = ({
                 <LayoutGrid size={32} className="text-stone-500" />
               </div>
               <h3 className="text-lg font-medium text-stone-700 mb-2">
-                {galleries.length > 0 ? "No images available" : "Ready to Explore?"}
+                Ready to Explore?
               </h3>
               <p className="leading-relaxed text-sm">
-                {galleries.length > 0 
-                 ? "We found galleries but excluded them due to missing exhibition imagery. Try refining your search."
-                 : "Tell HALFART where you'll be (e.g., \"Afternoon in Chelsea\") and I'll find the current shows for you."}
+                Tell HALFART where you'll be (e.g., "Afternoon in Chelsea") and I'll find the current shows for you.
               </p>
             </div>
           ) : (

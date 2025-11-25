@@ -4,7 +4,12 @@ export interface Exhibition {
   dates: string;
   description: string;
   image_url?: string;
+  url?: string;
+  exhibition_url?: string;
+  gallery_url?: string;
+  url_type?: 'exhibition' | 'listing' | 'listing_index' | 'gallery_home';
   source?: string;
+  placeholder_category?: 'painting' | 'sculpture' | 'photo' | 'installation' | 'mixed' | 'performance';
 }
 
 export type GalleryStatus = 'active' | 'inactive' | 'unknown';
@@ -23,6 +28,8 @@ export interface Gallery {
   imageUrl?: string; 
   vibes?: string[];
   mediums?: string[];
+  region_tags?: string[];
+  placeholder_category?: 'painting' | 'sculpture' | 'photo' | 'installation' | 'mixed' | 'performance';
   exhibitions: Exhibition[];
   in_plan?: boolean;
   reason?: string;
